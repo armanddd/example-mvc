@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="description" content="">
+		<meta name="Alban Fredon " content="First streaming website service">
+		<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+
+		<title>Aioclic, le premier service de streaming de sites web</title>
+
+		<!-- Additional CSS Files -->
+		{% block stylesheets%}
+			<link rel="stylesheet" type="text/css" href="{{ asset('/css/bootstrap.min.css') }}">
+			<link rel="stylesheet" type="text/css" href="{{ asset('/css/font-awesome.css') }}">
+			<link rel="stylesheet" type="text/css" href="{{ asset('/css/styles.css') }}">
+			<link rel="stylesheet" type="text/css" href="{{ asset('/css/owl-carousel.css') }}">
+		{% endblock %}
+		{% block extraStylesheets %}{% endblock %}
+
+	</head>
+
+	<body>
+
+		{% block content %}{% endblock %}
+
+		{% block js %}
+			<!-- jQuery -->
+			<script src="{{ asset('/js/libs/jquery-3.5.1.min.js') }}"></script>
+
+			<!-- Bootstrap -->
+			<script src="{{ asset('/js/libs/popper.min.js') }}"></script>
+			<script src="{{ asset('/js/libs/bootstrap.min.js') }}"></script>
+
+			<!-- Plugins -->
+			<script src="{{ asset('/js/libs/owl-carousel.js') }}"></script>
+			<script src="{{ asset('/js/libs/scrollreveal.min.js') }}"></script>
+			<script src="{{ asset('/js/libs/waypoints.min.js') }}"></script>
+			<script src="{{ asset('/js/libs/jquery.counterup.min.js') }}"></script>
+			<script src="{{ asset('/js/libs/imgfix.min.js') }}"></script>
+			<script src="{{ asset('/js/libs/swal2.min.js') }}"></script>
+		{% endblock %}
+		{% block extraJs %}{% endblock %}
+
+	</body>
+</html>

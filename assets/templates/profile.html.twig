@@ -1,0 +1,153 @@
+{% extends 'base.html.twig' %}
+
+{% block extraStylesheets %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('/css/profile.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('/css/alignContainer.css') }}">
+{% endblock %}
+
+{% block content %}
+    <div class="container emp-profile">
+            <div class="row">
+                <div class="col-md-9">
+                    <div class="profile-head">
+                        <h5>
+                            {{ session.nom }} {{ session.prenom }}
+                        </h5>
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
+                                   aria-controls="home" aria-selected="true" onclick="$('#editProfileButton').show();$('#returnButton').css('width', '');">Profile</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
+                                   aria-controls="profile" aria-selected="false" onclick="$('#editProfileButton').hide();$('#returnButton').css('width', '100%');">Souscription</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <button class="btn btn-info" type="button" id="returnButton" onclick="window.location.replace('/')">Retour</button>
+                    <button type="submit" class="btn btn-info" id="editProfileButton" onclick="submitProfileForm();">Editer Profile</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="tab-content profile-tab" id="myTabContent">
+                        <div class="tab-pane fade show active ml-3" id="home" role="tabpanel"
+                             aria-labelledby="home-tab">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Nom</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" name="name" id="nameInput" value="{{ session.nom }}">
+                                    {#                                    <p>{{ session.nom }}</p>#}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Prenom</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" name="prenom" id="surnameInput" value="{{ session.prenom }}">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Email</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" name="email" id="emailInput" value="{{ session.email }}">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Téléphone</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" name="telephone" id="telephoneInput"
+                                           value="{{ session.telephone }}">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Mot de passe actuel</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" name="password" id="passwordInput" value="">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Nouveau mot de passe</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" name="newPassword" id="newPasswordInput" value="">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Nouveau mot de passe - vérification</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" name="newPasswordVerify" id="newPasswordVerifyInput" value="">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Souscription</label>
+                                </div>
+                                <div class="col-md-6">
+                                    {% if session.subscription == false %}
+                                        <p>Pas de souscription active</p>
+                                    {% else %}
+                                        <p>{{ session.subscription.subscription_name ~ ' - ' ~ session.subscription.subscription_price ~ '€' }}</p>
+                                    {% endif %}
+
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label>Souscription active</label>
+                                </div>
+                                <div class="col-md-10">
+                                    {% if session.subscription == false %}
+                                        <p style="padding-left: 15px">Pas de souscription active</p>
+                                    {% else %}
+                                        <p style="padding-left: 15px">{{ session.subscription.subscription_name ~ ' - ' ~ session.subscription.subscription_price ~ '€' }}</p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <hr style="margin-top:0"/>
+                            <div class="row">
+                                <div class="col-md-2">
+                                    {% if session.subscription == false %}
+                                        <label>Acheter une souscription</label>
+                                    {% else %}
+                                        <p>Améliorer votre souscription</p>
+                                    {% endif %}
+                                </div>
+                                <div class="col-md-10">
+                                        {% embed('purchase.html.twig') %}
+                                            {#removing the useless stylesheets and the button blocks#}
+                                            {% block extraStylesheets %}
+                                            {% endblock %}
+                                            {% block returnButton %}
+                                            {% endblock %}
+                                            {#removing the useless stylesheets and the button blocks#}
+                                        {% endembed %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+{% endblock %}
+
+{% block extraJs %}
+    <script src="{{ asset('/js/forms.js') }}"></script>
+{% endblock %}

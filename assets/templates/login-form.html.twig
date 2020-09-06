@@ -1,0 +1,67 @@
+{% extends "base.html.twig" %}
+
+{% block extraStylesheets %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('/css/alignContainer.css') }}">
+{% endblock %}
+
+{% block content %}
+    <div class="container py-5" data-scroll-reveal='enter top and move 5rem over 1.46s'>
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <span class="anchor" id="formLogin"></span>
+
+                <!-- form card login with validation feedback -->
+                <div class="card card-outline-secondary">
+                    <div class="card-header">
+                        <h3 class="mb-0">AIOCLIC</h3>
+                    </div>
+                    <div class="card-body formColor">
+                        {% if showCaptcha %}
+                            <form class="form" id="loginForm" onsubmit="return submitLoginForm(true);">
+                        {% else %}
+                            <form class="form" id="loginForm" onsubmit="return submitLoginForm(false);">
+                        {% endif %}
+
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input type="text" class="form-control" name="email" id="email" required="">
+                                </div>
+                                <div class="form-group">
+                                    <label for="pwd">Mot de passe</label>
+                                    <input type="password" class="form-control" name="pwd" id="pwd" required="">
+                                </div>
+                                <div class="form-group">
+                                    <a href="/reset.php">Mot de passe oublié ?</a>
+                                </div>
+                                <div class="form-check small"></div>
+
+                                <div id="captchaGoogle"></div>
+                                {% if showCaptcha %}
+                                    <div class="g-recaptcha"
+                                         data-sitekey="6LdJ5cAZAAAAAOg999i8QrR_OmMtjxLx5xu0oH7K"></div>
+                                {% endif %}
+
+
+                                <input type="submit" class="btn btn-info btn-lg float-right" id="btnLogin"
+                                       value="Connexion">
+
+                                <button type="button" class="btn btn-info btn-lg float-right mr-3" id="btnLogin"
+                                        onclick="window.location.replace('/')">
+                                    Retour
+                                </button>
+
+                            </form>
+                    </div>
+                    <!--/card-body-->
+                </div>
+                <!-- /form card login -->
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block extraJs %}
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script src="{{ asset('/js/cookieAndModals.js') }}"></script>
+    <script src="{{ asset('/js/forms.js') }}"></script>
+{% endblock %}

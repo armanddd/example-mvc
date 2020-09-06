@@ -1,0 +1,79 @@
+{% block extraStylesheets %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('/css/alignContainer.css') }}">
+    <style>
+        body {
+            background: -webkit-linear-gradient(left, #3931af, #00c6ff);
+        }
+        #btnPurchase{
+            margin-left: 37.5%;
+        }
+
+    </style>
+{% endblock %}
+
+{% block content %}
+    {# TODO creer les offres a partir de la base #}
+    <div class="container">
+        <div class="card-deck mb-3 text-center">
+            <div class="card mb-4 box-shadow">
+                <div class="card-header">
+                    <h4 class="my-0 font-weight-normal">Offre n°1</h4>
+                </div>
+                <div class="card-body formColor">
+                    <h1 class="card-title pricing-card-title">$8 <br><small class="text-muted">/ mo</small></h1>
+                    <ul class="list-unstyled mt-3 mb-4">
+                        <li>1 poste</li>
+                    </ul>
+                    <button type="button" class="btn btn-lg btn-block btn-primary btnAchat" onclick="window.location.href = 'https://www.google.com'">Acheter</button>
+                </div>
+            </div>
+            <div class="card mb-4 box-shadow">
+                <div class="card-header">
+                    <h4 class="my-0 font-weight-normal">Offre n°2</h4>
+                </div>
+                <div class="card-body formColor">
+                    <h1 class="card-title pricing-card-title">$10 <br><small class="text-muted">/ mo</small></h1>
+                    <ul class="list-unstyled mt-3 mb-4">
+                        <li>2 postes</li>
+                    </ul>
+                    <button type="button" class="btn btn-lg btn-block btn-primary btnAchat" onclick="window.location.href = 'https://www.google.com'">Acheter</button>
+                </div>
+            </div>
+            <div class="card mb-4 box-shadow">
+                <div class="card-header">
+                    <h4 class="my-0 font-weight-normal">Offre n°3</h4>
+                </div>
+                <div class="card-body formColor">
+                    <h1 class="card-title pricing-card-title">$35 <br><small class="text-muted">/ mo</small></h1>
+                    <ul class="list-unstyled mt-3 mb-4">
+                        <li>7 postes</li>
+                    </ul>
+                    <button type="button" class="btn btn-lg btn-block btn-primary btnAchat" onclick="window.location.href = 'https://www.google.com'">Acheter</button>
+                </div>
+            </div>
+            <div class="card mb-4 box-shadow">
+                <div class="card-header">
+                    <h4 class="my-0 font-weight-normal">Offre n°4</h4>
+                </div>
+                <div class="card-body formColor">
+                    <h1 class="card-title pricing-card-title">$99 <br><small class="text-muted">/ mo</small></h1>
+                    <ul class="list-unstyled mt-3 mb-4">
+                        <li>Accès illimité</li>
+                    </ul>
+                    <button type="button" class="btn btn-lg btn-block btn-primary btnAchat" onclick="window.location.href = 'https://www.google.com'">Acheter</button>
+                </div>
+            </div>
+        </div>
+        {% block returnButton %}
+            <button type="button" class="btn btn-info btn-lg w-25" id="btnPurchase"
+                    onclick="window.location.href = '/'">Retour
+            </button>
+        {% endblock %}
+    </div>
+{% endblock %}
+
+{% block extraJs %}
+    <script src="{{ asset('/js/purchase.js') }}"></script>
+    <script>disableCheaperSubscriptions({{ session.subscription.subscription_id }})</script>
+{% endblock %}

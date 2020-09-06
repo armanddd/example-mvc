@@ -1,0 +1,68 @@
+{% extends "base.html.twig" %}
+
+{% block extraStylesheets %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('/css/alignContainer.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-5" data-scroll-reveal="enter bottom and move 10rem over 1.46s">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <span class="anchor" id="formRegister"></span>
+
+            <!-- form card register -->
+            <div class="card card-outline-secondary">
+                <div class="card-header">
+                    <h3 class="mb-0">AIOCLIC</h3>
+                </div>
+                <div class="card-body formColor">
+                    <form class="form" id="registerForm" onsubmit="return submitRegisterForm();">
+                        <div class="form-group">
+                            <label for="inputName">Nom</label>
+                            <input type="text" class="form-control" name="inputName" id="inputName" placeholder="Nom">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputSurname">Prenom</label>
+                            <input type="text" class="form-control" name="inputSurname" id="inputSurname"
+                                   placeholder="Prenom">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEmail">Email</label>
+                            <input type="email" class="form-control" name="inputEmail" id="inputEmail"
+                                   placeholder="Email" required="">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputTel">Téléphone</label>
+                            <input type="text" class="form-control" id="inputTel" name="inputTel"
+                                   placeholder="Numero de téléphone" required="">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword3">Mot de passe</label>
+                            <input type="password" class="form-control" name="inputPassword3" id="inputPassword3"
+                                   placeholder="Mot de passe" required="">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputVerify3">Mot de passe - vérification</label>
+                            <input type="password" class="form-control" name="inputVerify3" id="inputVerify3"
+                                   placeholder="Mot de passe" required="">
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" class="btn btn-info btn-lg float-right" value="Inscription">
+                            </button>
+                            <button type="button" class="btn btn-info btn-lg float-right mr-3" id="btnLogin"
+                                    onclick="window.location.replace('/')">
+                                Retour
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- /form card register -->
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extraJs %}
+    <script src="{{ asset('/js/forms.js') }}"></script>
+{% endblock %}

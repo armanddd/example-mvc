@@ -1,0 +1,12 @@
+/*ONLY IMPORT WHEN WANT TO ALIGN A CONTAINER VERTICALLY*/
+html,
+body {
+    height: 100%;
+    width: 100%;
+    display: inline-flex;
+}
+
+.container, .container-fluid{
+    margin: auto;
+}
+
