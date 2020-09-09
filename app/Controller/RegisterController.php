@@ -10,8 +10,10 @@ class RegisterController
 {
     public static function renderMainView()
     {
-        //#TODO check for session.if logged in, redirect
+        //INSTANTIATING SESSION
         Session::getInstance();
+        //REDIRECTING IF LOGGED IN
+        GenericController::redirectIfLoggedIn($_SESSION, "");
         echo TwigInit::loadTwig()->render('registration-form.html.twig', ['session' => $_SESSION]);
     }
 }

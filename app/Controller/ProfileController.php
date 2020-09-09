@@ -10,8 +10,10 @@ class ProfileController
 {
     public static function renderMainView()
     {
-        //#TODO check for session.if not logged in, redirect
+        //INSTANTIATING SESSION
         Session::getInstance();
+        //REDIRECTING IF NOT LOGGED IN
+        GenericController::redirectIfNotLoggedIn($_SESSION, "");
         echo TwigInit::loadTwig()->render('profile.html.twig', ['session' => $_SESSION]);
     }
 }

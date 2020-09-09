@@ -10,8 +10,10 @@ class ResetController
 {
     public static function renderMainView()
     {
-        //#TODO check for session.if logged in, redirect
+        //INSTANTIATING SESSION
         Session::getInstance();
+        //REDIRECTING IF ALREADY LOGGED IN
+        GenericController::redirectIfLoggedIn($_SESSION, "");
         echo TwigInit::loadTwig()->render('reset-form.html.twig');
     }
 }

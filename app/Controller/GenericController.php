@@ -36,4 +36,23 @@ class GenericController
         }
     }
 
+    public static function redirectIfNotLoggedIn($session, String $redirectRoute)
+    {
+        if (empty($session)){
+            header("Location: http://" . $_SERVER["HTTP_HOST"] . "/" . $redirectRoute);
+            exit;
+       } else {
+            return true;
+        }
+    }
+
+    public static function redirectIfLoggedIn($session, String $redirectRoute)
+    {
+        if (!empty($session)){
+            header("Location: http://" . $_SERVER["HTTP_HOST"] . "/" . $redirectRoute);
+            exit;
+        } else {
+            return true;
+        }
+    }
 }

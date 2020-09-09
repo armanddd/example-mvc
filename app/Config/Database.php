@@ -2,19 +2,14 @@
 
 namespace App\Config;
 
-class Database{
-    const HOST = '138.68.88.243';
-    const DB = 'aioclic';
-    const USER = 'aioclic';
-    const PASS = '!!Rarara123!!';
-    const CHARSET = 'utf8mb4';
-    const DSN = 'mysql:host=' . self::HOST . ';' .
-    'dbname=' . self::DB  . ';' .
-    'charset=' . self::CHARSET;
+use App\Services\ReadConfig;
 
+class Database{
     public static function getPdoInstance(): \PDO{
         try {
-            return new \PDO(self::DSN, self::USER, self::PASS);
+            $config = ReadConfig::readAndExtractConfig();
+            $dsn = 'mysql:host=' . $config->dbHost . ';' . 'dbname=' . $config->dbName  . ';' . 'charset=' . $config->dbCharset;
+            return new \PDO($dsn, $config->dbUsername, $config->dbPassword);
         } catch(\PDOException $e) {
             throw $e;
         }
