@@ -71,6 +71,15 @@ function eraseCookie(name, path) {
         $("#pwd").val(readCookie("tempLoginPassword"));
         eraseCookie("tempLoginPassword", "login");
     }
+    if (readCookie("anotherLoginDetected"))
+    {
+        Swal.fire({
+            icon: 'error',
+            text: 'Une autre connexion avec vos identifiants a été detectée. Déconnexion en cours.',
+        }).then(() => {
+            eraseCookie("anotherLoginDetected", "");
+        });
+    }
 
 
 })( window.jQuery );

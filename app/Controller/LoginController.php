@@ -16,9 +16,9 @@ class LoginController
         Session::getInstance();
         //REDIRECTING IF ALREADY LOGGED IN
         GenericController::redirectIfLoggedIn($_SESSION, "");
-
+        //true if need to show captcha, false anotherwise
         $showCaptcha = self::determineCaptcha();
-
+        //renders view
         echo TwigInit::loadTwig()->render('login-form.html.twig', ["showCaptcha" => $showCaptcha]);
     }
 

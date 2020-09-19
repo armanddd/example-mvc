@@ -14,6 +14,7 @@ class ResetController
         Session::getInstance();
         //REDIRECTING IF ALREADY LOGGED IN
         GenericController::redirectIfLoggedIn($_SESSION, "");
+        //renders view
         echo TwigInit::loadTwig()->render('reset-form.html.twig');
     }
 }

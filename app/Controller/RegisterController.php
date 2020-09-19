@@ -14,6 +14,7 @@ class RegisterController
         Session::getInstance();
         //REDIRECTING IF LOGGED IN
         GenericController::redirectIfLoggedIn($_SESSION, "");
+        //renders view
         echo TwigInit::loadTwig()->render('registration-form.html.twig', ['session' => $_SESSION]);
     }
 }

@@ -72,12 +72,12 @@ class FormAction
         extract($data); // ext email, pwd, action, captcha
         $secretCaptcha = "6LdJ5cAZAAAAAMKedqoPe-9g2CJuPpR92RzZafYJ"; //sercret for google captcha
 
-        $existingLoginAttempt = GenericController::getLastLoginAttempt();
+        $existingLoginAttempt = GenericController::getLastLoginAttempt(); //getting last login attempt by the ip adress
 
         //CONVERTING STRINGS IN TO DATETIMES
         $lastLoginDate = new \DateTime($existingLoginAttempt['last_attempt']);
 
-        //verification du captcha
+        //checks the captcha conditions(if its been more then 2 hours and 10 attempts)
         if (time() - strtotime($lastLoginDate->format("Y-m-d H:i:s")) < 7200 && (int)$existingLoginAttempt['attempt_counter'] >= 10) {
             if (!empty($captcha))
                 $verifyCaptcha = json_decode(file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret={$secretCaptcha}&response={$captcha}"));
@@ -87,7 +87,7 @@ class FormAction
             }
         }
 
-
+        //checks if the form fields have been completed and fetches an user in the db
         if (isset($email) && !empty($email) &&
             isset($pwd) && !empty($pwd)) {
             $db = Database::getPdoInstance();
@@ -102,7 +102,9 @@ class FormAction
             } catch (\Exception $e) {
                 throw $e;
             }
+            //checks the hashed user password
             if (isset($user['mdp']) && password_verify($pwd, $user['mdp'])) {
+                //selecting the user active session in to the database
                 Session::getInstance();
 
                 //getting the active subscription for the user if there is one
@@ -117,25 +119,45 @@ class FormAction
                 );
                 $activeSubscription = $stmt->fetch(\PDO::FETCH_ASSOC);
 
+                //generating the session
                 $_SESSION['subscription'] = $activeSubscription;
                 $_SESSION['nom'] = $user['nom'];
                 $_SESSION['prenom'] = $user['prenom'];
                 $_SESSION['email'] = $user['email'];
                 $_SESSION['telephone'] = $user['telephone'];
                 $_SESSION['user_id'] = $user['id'];
+                
+                //tries to fetch the active session
+                $stmt = $db->prepare("SELECT * FROM user_active_session WHERE user_id = :user_id");
+                $stmt->execute([
+                    'user_id' => $user['id']
+                ]);
+
+                $activeSession = $stmt->fetch(\PDO::FETCH_ASSOC);
+
+                //if there is no active session, create one
+                if($activeSession === false){
+                    $stmt = $db->prepare("INSERT INTO user_active_session VALUES (:user_id, :session_id, NOW())");
+                    $stmt->execute([
+                        'user_id' => $user['id'],
+                        'session_id' => session_id()
+                    ]);
+                } else { //if there is an active session, update it
+                    $stmt = $db->prepare("UPDATE user_active_session SET session_id = :session_id");
+                    $stmt->execute([
+                        'session_id' => session_id()
+                    ]);
+                }
                 echo json_encode("loginSuccesful");
             } else {
                 //FETCHING THE LAST LOGIN ATTEMPT
                 $existingLoginAttempt = GenericController::getLastLoginAttempt();
 
-                //checks if $existingLoginAttempt is false
+                //checks if $existingLoginAttempt is false.if it is, create a failed login attempt
                 if (empty($existingLoginAttempt)) {
                     $stmt = $db->prepare("INSERT INTO login_attempts (`ip_adress`, `attempt_counter`, `last_attempt`) VALUES (:ip, 1, NOW())");
                     $stmt->execute(['ip' => $existingLoginAttempt['ip_adress']]);
                 } else { //else if a login attempt already exists with this adress, increments the attempt_counter in db
-
-                    //get last attempt
-                    $lastAttempt = GenericController::getLastLoginAttempt();
 
                     //increment attempt counter by one
                     $stmt = $db->prepare("UPDATE login_attempts 
@@ -148,12 +170,12 @@ class FormAction
                         ]
                     );
                 }
-                //set the login fail json message to true
+                //checks all the condition for the captcha to exist, then set the login fail json message to true
                 if (time() - strtotime($lastLoginDate->format("Y-m-d H:i:s")) < 7200 &&
                     (int)$existingLoginAttempt['attempt_counter'] >= 10 && isset($captcha) && empty($captcha)) {
                     echo json_encode("loginFailWithCaptcha");
                 }
-                else {
+                else { // else if there is no captcha, just set the login fail json message
                     echo json_encode("loginFail");die;
                 }
             }

@@ -14,6 +14,9 @@ class ProfileController
         Session::getInstance();
         //REDIRECTING IF NOT LOGGED IN
         GenericController::redirectIfNotLoggedIn($_SESSION, "");
+        //checks for only one active session at a time
+        Session::checkInstance();
+        //renders view
         echo TwigInit::loadTwig()->render('profile.html.twig', ['session' => $_SESSION]);
     }
 }
