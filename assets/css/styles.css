@@ -347,6 +347,7 @@ header
 .header-area .main-nav {
     min-height: 80px;
     background: transparent;
+    height: 150%;
 }
 
 .header-area .main-nav .logo {
@@ -536,7 +537,6 @@ header
     background-color: #fff;
     display: block;
     position: absolute;
-    width: 30px;
     height: 2px;
     left: 0;
     width: 75%;
@@ -622,21 +622,35 @@ header
         padding-right: 12px;
     }
 
+    #alternativeTitle{
+        font-size: 5rem;
+    }
+
+    .logo {
+        display: none;
+    }
+
     .header-area .main-nav:before {
         display: none;
     }
 }
 
 @media (max-width: 991px) {
+    .logo {
+        display: flex;
+    }
+    #alternativeTitle{
+        font-size: 2rem;
+    }
     .header-area {
-        padding: 0px 15px;
+        padding: 0 15px;
         height: 80px;
         box-shadow: none;
         text-align: center;
     }
 
     .header-area .container {
-        padding: 0px;
+        padding: 0;
     }
 
     .header-area .logo {
@@ -737,7 +751,7 @@ header
 
     .header-area .main-nav .nav li.submenu:hover ul,
     .header-area .main-nav .nav li.submenu:focus ul {
-        height: 0px;
+        height: 0;
     }
 }
 
@@ -801,7 +815,7 @@ welcome
     position: relative;
 }
 
-@media (max-width: 991px) {
+@media (max-width: 992px) {
     .welcome-area .header-text {
         top: 55% !important;
         transform: perspective(1px) translateY(-60%) !important;
@@ -822,6 +836,17 @@ welcome
         color: #fff;
         margin-bottom: 30px;
     }
+    .dropdown-item {
+        text-align: center;
+    }
+    #editProfileButton{
+        width: 100%;
+        margin: 3px;
+    }
+    #returnButton{
+        width: 100%;
+        margin: 3px;
+    }
 }
 
 @media (max-width: 820px) {
@@ -841,7 +866,7 @@ welcome
     }
 }
 
-@media (max-width: 765px) {
+@media (max-width: 769px) {
     .welcome-area {
         margin-bottom: 100px;
     }

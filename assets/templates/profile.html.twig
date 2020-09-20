@@ -16,11 +16,11 @@
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                             <li class="nav-item">
                                 <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
-                                   aria-controls="home" aria-selected="true" onclick="$('#editProfileButton').show();$('#returnButton').css('width', '');">Profile</a>
+                                   aria-controls="home" aria-selected="true" onclick="resizeProfile('profileClick')">Profile</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
-                                   aria-controls="profile" aria-selected="false" onclick="$('#editProfileButton').hide();$('#returnButton').css('width', '100%');">Souscription</a>
+                                   aria-controls="profile" aria-selected="false" onclick="resizeProfile('subscribeClick')">Souscription</a>
                             </li>
                         </ul>
                     </div>
@@ -40,7 +40,7 @@
                                     <label>Nom</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <input type="text" name="name" id="nameInput" value="{{ session.nom }}">
+                                    <input type="text" name="name" class="form-control" id="nameInput" value="{{ session.nom }}">
                                     {#                                    <p>{{ session.nom }}</p>#}
                                 </div>
                             </div>
@@ -49,7 +49,7 @@
                                     <label>Prenom</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <input type="text" name="prenom" id="surnameInput" value="{{ session.prenom }}">
+                                    <input type="text" name="prenom" class="form-control" id="surnameInput" value="{{ session.prenom }}">
                                 </div>
                             </div>
                             <div class="row">
@@ -57,7 +57,7 @@
                                     <label>Email</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <input type="text" name="email" id="emailInput" value="{{ session.email }}">
+                                    <input type="text" name="email" class="form-control" id="emailInput" value="{{ session.email }}">
                                 </div>
                             </div>
                             <div class="row">
@@ -65,8 +65,7 @@
                                     <label>Téléphone</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <input type="text" name="telephone" id="telephoneInput"
-                                           value="{{ session.telephone }}">
+                                    <input type="text" name="telephone" class="form-control" id="telephoneInput" value="{{ session.telephone }}">
                                 </div>
                             </div>
                             <div class="row">
@@ -74,7 +73,7 @@
                                     <label>Mot de passe actuel</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <input type="text" name="password" id="passwordInput" value="">
+                                    <input type="text" name="password" class="form-control" id="passwordInput" value="">
                                 </div>
                             </div>
                             <div class="row">
@@ -82,7 +81,7 @@
                                     <label>Nouveau mot de passe</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <input type="text" name="newPassword" id="newPasswordInput" value="">
+                                    <input type="text" name="newPassword" class="form-control" id="newPasswordInput" value="">
                                 </div>
                             </div>
                             <div class="row">
@@ -90,7 +89,7 @@
                                     <label>Nouveau mot de passe - vérification</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <input type="text" name="newPasswordVerify" id="newPasswordVerifyInput" value="">
+                                    <input type="text" name="newPasswordVerify" class="form-control" id="newPasswordVerifyInput" value="">
                                 </div>
                             </div>
                             <div class="row">
@@ -125,9 +124,9 @@
                             <div class="row">
                                 <div class="col-md-2">
                                     {% if session.subscription == false %}
-                                        <label>Acheter une souscription</label>
+                                        <label>Achetez une souscription</label>
                                     {% else %}
-                                        <p>Améliorer votre souscription</p>
+                                        <p>Améliorez votre souscription</p>
                                     {% endif %}
                                 </div>
                                 <div class="col-md-10">

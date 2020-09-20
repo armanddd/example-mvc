@@ -358,3 +358,21 @@ function submitResetForm() {
 
     return false;
 }
+
+/**function that resizes the profile window*/
+function resizeProfile(event){
+    if (event === "profileClick"){
+        $('#editProfileButton').show();
+        $('#returnButton').css('width', '');
+        $('body').height('100%');
+    } else if (event === "subscribeClick") {
+        $('#editProfileButton').hide();
+        $('#returnButton').css('width', '100%');
+        if($(window).height() > 1000)
+            $('body').height('160%');
+        else if($(window).height() > 1100)
+            $('body').height('130%');
+        else
+            $('body').height('216%');
+    }
+}

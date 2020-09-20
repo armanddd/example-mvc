@@ -1,12 +1,5 @@
 {% extends "base.html.twig" %}
 
-{% block extraStylesheets %}
-    <style>
-        @media screen and (min-width: 768px){
-            .collapse{ display:block;}
-        }
-        </style>
-{% endblock %}
 {% block content %}
 
 
@@ -26,9 +19,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <nav
-
-                            class="main-nav">
+                    <nav class="main-nav">
                         <!-- ***** Logo Start ***** -->
                         <a href="#welcome" class="logo">Aioclic&nbsp;</a>
                         <!-- ***** Logo End ***** -->
@@ -101,7 +92,7 @@
                     <div class="left-text col-lg-6 col-md-6 col-sm-12 col-xs-12"
                          data-scroll-reveal="enter left move 30px over 0.6s after 0.4s">
                         <h1>
-                            <strong>Aioclic</strong>
+                            <strong id="alternativeTitle">Aioclic</strong>
                         </h1>
                         <p>Le premier service de sites en streaming</p>
                         <a href="#about" class="main-button-slider">Find Out More</a>

@@ -29,9 +29,8 @@ function eraseCookie(name, path) {
         Swal.fire({
             icon: 'success',
             text: 'Compte crée avec succes',
-        }).then(() => {
-            eraseCookie("newAccount", ""); //if 3rd arg is 0, the cookie is removed
         });
+        eraseCookie("newAccount", ""); //if 3rd arg is 0, the cookie is removed
     }
     if (readCookie("forgottenPasswordValidEmail") === "true")
     {
@@ -39,27 +38,24 @@ function eraseCookie(name, path) {
             icon: 'success',
             title: 'Mot de passe reinitialisé',
             text: 'Si l\'adresse mail fournie est valide alors un lien de reinitialisation de mot de passe vous a été envoyé',
-        }).then(() => {
-            eraseCookie("forgottenPasswordValidEmail", "login"); //if 3rd arg is 0, the cookie is removed
         });
+        eraseCookie("forgottenPasswordValidEmail", "login"); //if 3rd arg is 0, the cookie is removed
     }
     if (readCookie("loginFail") === "true")
     {
         Swal.fire({
             icon: 'error',
             text: 'Adresse email ou mot de passe inccorect',
-        }).then(() => {
-            eraseCookie("loginFail", "login");
         });
+        eraseCookie("loginFail", "login");
     }
     if (readCookie("failedCaptcha") === "true")
     {
         Swal.fire({
             icon: 'error',
             text: 'Erreur lors de la soumission du captcha',
-        }).then(() => {
-            eraseCookie("failedCaptcha", "login");
         });
+        eraseCookie("failedCaptcha", "login");
     }
     if (readCookie("tempLoginEmail"))
     {
@@ -76,10 +72,7 @@ function eraseCookie(name, path) {
         Swal.fire({
             icon: 'error',
             text: 'Une autre connexion avec vos identifiants a été detectée. Déconnexion en cours.',
-        }).then(() => {
-            eraseCookie("anotherLoginDetected", "");
         });
+        eraseCookie("anotherLoginDetected", "");
     }
-
-
 })( window.jQuery );
