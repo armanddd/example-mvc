@@ -1,4 +1,4 @@
-# Example d'architecture type MVC from scratch
+# Example d'architecture MVC from scratch
 
 **Aioclic**
 
