@@ -19,6 +19,15 @@
 			<link rel="stylesheet" type="text/css" href="{{ asset('/css/owl-carousel.css') }}">
 		{% endblock %}
 		{% block extraStylesheets %}{% endblock %}
+		<!-- if js is not enable, disable scrolling -->
+		<noscript>
+			<style>
+				body {
+					overflow:hidden;
+				}
+			</style>
+		</noscript>
+		<!-- if js is not enable, disable scrolling -->
 
 	</head>
 
