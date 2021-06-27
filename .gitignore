@@ -1,4 +1,4 @@
 vendor/
 .idea/
 .vscode/
-assets/phpmyadmin/
+config.json

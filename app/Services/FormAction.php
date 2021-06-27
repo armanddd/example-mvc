@@ -70,7 +70,7 @@ class FormAction
     public static function loginForm($data)
     {
         extract($data); // ext email, pwd, action, captcha
-        $secretCaptcha = "6LdJ5cAZAAAAAMKedqoPe-9g2CJuPpR92RzZafYJ"; //sercret for google captcha
+        $secretCaptcha = "6LchhL8ZAAAAAPet29FTYkA8vNC6jgOcF7F8Das8"; //sercret for google captcha
 
         $existingLoginAttempt = GenericController::getLastLoginAttempt(); //getting last login attempt by the ip adress
 
@@ -126,7 +126,7 @@ class FormAction
                 $_SESSION['email'] = $user['email'];
                 $_SESSION['telephone'] = $user['telephone'];
                 $_SESSION['user_id'] = $user['id'];
-                
+
                 //tries to fetch the active session
                 $stmt = $db->prepare("SELECT * FROM user_active_session WHERE user_id = :user_id");
                 $stmt->execute([
@@ -136,8 +136,8 @@ class FormAction
                 $activeSession = $stmt->fetch(\PDO::FETCH_ASSOC);
 
                 //if there is no active session, create one
-                if($activeSession === false){
-                    $stmt = $db->prepare("INSERT INTO user_active_session VALUES (:user_id, :session_id, NOW())");
+                if ($activeSession === false) {
+                    $stmt = $db->prepare("INSERT INTO user_active_session VALUES (default, :user_id, :session_id, NOW())");
                     $stmt->execute([
                         'user_id' => $user['id'],
                         'session_id' => session_id()
@@ -174,9 +174,9 @@ class FormAction
                 if (time() - strtotime($lastLoginDate->format("Y-m-d H:i:s")) < 7200 &&
                     (int)$existingLoginAttempt['attempt_counter'] >= 10 && isset($captcha) && empty($captcha)) {
                     echo json_encode("loginFailWithCaptcha");
-                }
-                else { // else if there is no captcha, just set the login fail json message
-                    echo json_encode("loginFail");die;
+                } else { // else if there is no captcha, just set the login fail json message
+                    echo json_encode("loginFail");
+                    die;
                 }
             }
         }
