@@ -1,4 +1,6 @@
-# aioclic
+# Example d'architecture type MVC from scratch
+
+**Aioclic**
 
 #1 - composer install
 
