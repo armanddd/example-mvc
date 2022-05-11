@@ -10,4 +10,4 @@
 
 ```deploiement en ligne```
 
-Se rendre sur : http://134.122.70.48/
+Se rendre sur : https://mvc-from-scratch.herokuapp.com/
